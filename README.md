@@ -94,7 +94,7 @@ Sets the receiver information of the remote peer, valid signatures are:
 The same as **dgram.createSocket()**, only it returns the `Socket` of this 
 module.
 
-### `createServer(addr: string, callback?: () => {})`
+### `createServer(addr: string, callback?: () => void)`
 
 Creates a UDP server according to the given address. This is a short-hand for 
 `createSocket(type).bind(port, addr)`.
