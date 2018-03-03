@@ -1,0 +1,26 @@
+{
+  "name": "dgramx",
+  "version": "0.1.0",
+  "description": "An enhanced Node.js dgram module.",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "dgram"
+  ],
+  "author": {
+    "name": "Ayon Lee",
+    "email": "i@hyurl.com",
+    "url": "http://hyurl.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyurl/dgramx.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "encoded-buffer": "^0.1.0"
+  }
+}
