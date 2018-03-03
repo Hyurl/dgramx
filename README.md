@@ -89,19 +89,19 @@ Sets the receiver information of the remote peer, valid signatures are:
 - `to(receiver: [string, port])` e.g. `to(["localhost", 12345])`
 - `to(addr: string, port: number)` e.g `to("localhost", 12345)`
 
-## `createSocket()`
+### `createSocket()`
 
 The same as **dgram.createSocket()**, only it returns the `Socket` of this 
 module.
 
-## `createServer(addr: string, callback?: () => {})`
+### `createServer(addr: string, callback?: () => {})`
 
 Creates a UDP server according to the given address. This is a short-hand for 
 `createSocket(type).bind(port, addr)`.
 
 The `addr` must contain a protocol, could be either `udp`, `udp4`, `udp6`.
  
-## `createClient(addr: string)`
+### `createClient(addr: string)`
 
 Creates a UDP client ready to the given server. This is a short-hand for 
 `createSocket(type).to(addr, port)`.
