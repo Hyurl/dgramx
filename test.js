@@ -1,4 +1,4 @@
-const { Socket, createServer, createClient } = require("./");
+const { createServer, createClient } = require("./");
 
 let addr = "udp://127.0.0.1:12345";
 var server = createServer(addr);

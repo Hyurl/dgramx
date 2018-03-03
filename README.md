@@ -15,7 +15,7 @@ current object, the event will be emitted by the remote peer, just like how
 ## Example
 
 ```javascript
-const { Socket, createServer, createClient } = require("dgramx");
+const { createServer, createClient } = require("dgramx");
 
 let addr = "udp://127.0.0.1:12345";
 var server = createServer(addr);
