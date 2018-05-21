@@ -1,6 +1,6 @@
 {
   "name": "dgramx",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An enhanced Node.js dgram module.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -21,9 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "encoded-buffer": "^0.1.1"
-  },
-  "engines": {
-    "node": ">=6.0.0"
+    "encoded-buffer": "^0.1.2",
+    "tslib": "^1.9.1"
   }
 }

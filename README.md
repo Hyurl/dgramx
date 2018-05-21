@@ -86,8 +86,10 @@ Sets the receiver information of the remote peer, valid signatures are:
 
 - `to(addr: string)` e.g. `to("localhost:12345")`.
 - `to(port: number)` e.g. `to(1234)`.
-- `to(receiver: [string, port])` e.g. `to(["localhost", 12345])`
 - `to(addr: string, port: number)` e.g `to("localhost", 12345)`
+
+You can call this method several times to set multiple receivers, but after 
+`emit()` is called, the receivers will be set to empty.
 
 ### `createSocket()`
 

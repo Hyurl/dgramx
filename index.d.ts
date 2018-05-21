@@ -3,7 +3,8 @@ export * from "dgram";
 
 export declare class Socket extends dgram.Socket {
     /** @private */
-    private receiver: [string, number];
+    private receivers: Array<{address: string, port: number}>;
+    private defaultPeer: {address: string, port: number};
     static ReservedEvents: string[];
 
     constructor(type: "udp4" | "udp6");
@@ -32,6 +33,7 @@ export declare class Socket extends dgram.Socket {
     /** Sets the remote peer address before emits an event. */
     to(addr: string): this;
     to(port: number): this;
+    /** deprecated */
     to(receiver: [string, number]): this;
     to(addr: string, port: number): this;
 }
@@ -50,3 +52,5 @@ export declare function createServer(addr: string, callback?: () => void): Socke
  *  createClient("udp://localhost:41234")
  */
 export declare function createClient(addr: string): Socket;
+
+export declare function parseAddr(addr: string): dgram.AddressInfo;
