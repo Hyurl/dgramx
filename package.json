@@ -1,6 +1,6 @@
 {
   "name": "dgramx",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "An enhanced Node.js dgram module.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -23,5 +23,8 @@
   "dependencies": {
     "encoded-buffer": "^0.1.3",
     "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^10.9.2"
   }
 }

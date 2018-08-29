@@ -32,27 +32,31 @@ var Socket = (function (_super) {
         });
     }
 
-    Socket.prototype.emit = function () {
-        var args = Array.prototype.slice.apply(arguments);
+    /**
+     * @param {string} event
+     * @param {any} msg 
+     * @param {()=>void} cb 
+     */
+    Socket.prototype.emit = function (event, msg, cb) {
+        if (Socket.ReservedEvents.indexOf(event) >= 0)
+            return _super.prototype.emit.apply(this, arguments);
 
-        if (this.constructor.ReservedEvents.indexOf(args[0]) >= 0)
-            return _super.prototype.emit.apply(this, args);
+        if (typeof msg == "function") {
+            cb = msg;
+            msg = undefined;
+        }
 
         if (this.receivers.length || this.defaultPeer) {
-            var cb;
-            if (typeof args[args.length - 1] == "function")
-                cb = args.pop();
-
-            var receivers = this.receivers.length
-                ? this.receivers
-                : [this.defaultPeer];
+            var data = encode(event, msg),
+                receivers = this.receivers.length
+                    ? this.receivers
+                    : [this.defaultPeer];
 
             for (var i in receivers) {
                 var address = receivers[i].address,
-                    port = receivers[i].port,
-                    msg = encode.apply(undefined, args);
+                    port = receivers[i].port;
 
-                this.send(msg, 0, msg.length, port, address, cb);
+                this.send(data, 0, data.length, port, address, cb);
             }
 
             this.receivers = [];

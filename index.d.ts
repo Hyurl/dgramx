@@ -1,7 +1,7 @@
 import * as dgram from "dgram";
 export * from "dgram";
 
-export declare class Socket extends dgram.Socket {
+export class Socket extends dgram.Socket {
     /** @private */
     private receivers: Array<{address: string, port: number}>;
     private defaultPeer: {address: string, port: number};
@@ -16,19 +16,21 @@ export declare class Socket extends dgram.Socket {
      * Adds a listener function to the specified event, the function will be 
      * called when a remote peer emits the event.
      */
-    on(event: string, listener: (...data: any[], rinfo: dgram.RemoteInfo) => void): this;
+    on(event: string, listener: (msg: any, rinfo: dgram.RemoteInfo) => void): this;
 
     once(event: "close" | "listening", listener: () => void): this;
     once(event: "error", listener: (err: Error) => void): this;
     once(event: "message", listener: (msg: Buffer, rinfo: dgram.RemoteInfo) => void): this;
-    once(event: string, listener: (...data: any[], rinfo: dgram.RemoteInfo) => void): this;
+    once(event: string, listener: (msg: any, rinfo: dgram.RemoteInfo) => void): this;
 
+    emit(event: "listening"): boolean;
     emit(event: "close" | "error"): boolean;
     emit(event: "error", err: Error): boolean;
     emit(event: "message", msg: Buffer, rinfo: dgram.RemoteInfo): boolean;
     /** Emits the specified event, and sends data to the remote peer. */
-    emit(event: string, ...data: any[]): boolean;
-    emit(event: string, ...data: any[], callback: (err: Error, bytes: number) => {}): boolean;
+    emit(event: string, msg: any, callback?: (err: Error, bytes: number) => void): boolean;
+    /** Emits the specified event. */
+    emit(event: string, callback?: (err: Error, bytes: number) => void): boolean;
 
     /** Sets the remote peer address before emits an event. */
     to(addr: string): this;
@@ -43,7 +45,7 @@ export declare class Socket extends dgram.Socket {
  * @example
  *  createServer("udp://localhost:41234")
  */
-export declare function createServer(addr: string, callback?: () => void): Socket;
+export function createServer(addr: string, callback?: () => void): Socket;
 
 /**
  * Creates a UDP client ready to the given server.
@@ -51,6 +53,6 @@ export declare function createServer(addr: string, callback?: () => void): Socke
  * @example
  *  createClient("udp://localhost:41234")
  */
-export declare function createClient(addr: string): Socket;
+export function createClient(addr: string): Socket;
 
-export declare function parseAddr(addr: string): dgram.AddressInfo;
+export function parseAddr(addr: string): dgram.RemoteInfo;

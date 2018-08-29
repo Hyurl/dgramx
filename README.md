@@ -63,18 +63,14 @@ If the event is reserved, then it acts just as talked above. But if the event
 is customized, then the listener function will be called when the remote peer 
 emits the event. The signature of the listener function is:
 
-`(...data: any[], rinfo: dgram.RemoteInfo) => void`
-- `...data` any number of parameter could be specified.
+`(msg: any, rinfo: dgram.RemoteInfo) => void`
+- `msg` The message needed to be sent.
 - `rinfo` Remote information contains:
     - `address: string` the address of the remote peer.
     - `port: number` binding port of the remote peer.
     - `family: "IPv4" | "IPv6"`
-    - `size: number` buffer size.
 
-**Warning**, the number of `data` should be equal to the number that the 
-remote peer has sent. otherwise the `rinfo` may never appear.
-
-### `Socket.prototype.emit(event: string, ...data: any[]): boolean`
+### `Socket.prototype.emit(event: string, msg: any): boolean`
 
 Apart from reserved events, you can emit any customized event to the remote 
 peer, and sends data when the event fires. Be aware, the number of `data` 
