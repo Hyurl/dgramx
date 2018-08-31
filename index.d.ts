@@ -27,10 +27,10 @@ export class Socket extends dgram.Socket {
     emit(event: "close" | "error"): boolean;
     emit(event: "error", err: Error): boolean;
     emit(event: "message", msg: Buffer, rinfo: dgram.RemoteInfo): boolean;
-    /** Emits the specified event, and sends data to the remote peer. */
-    emit(event: string, msg: any, callback?: (err: Error, bytes: number) => void): boolean;
     /** Emits the specified event. */
     emit(event: string, callback?: (err: Error, bytes: number) => void): boolean;
+    /** Emits the specified event, and sends data to the remote peer. */
+    emit(event: string, msg: any, callback?: (err: Error, bytes: number) => void): boolean;
 
     /** Sets the remote peer address before emits an event. */
     to(addr: string): this;
