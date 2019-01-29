@@ -10,7 +10,8 @@ listener and emit an event.
 
 This module allows you bind custom events, and instead of emitting them by the
 current object, the event will be emitted by the remote peer, just like how 
-[socket.io](https://socket.io) does, and build communication in a more easier way.
+[socket.io](https://socket.io) does, and build communication in a more easier 
+way.
 
 ## Example
 
@@ -89,8 +90,8 @@ You can call this method several times to set multiple receivers, but after
 
 ### `createSocket()`
 
-The same as **dgram.createSocket()**, only it returns the `Socket` of this 
-module.
+The same as **dgram.createSocket()**, only it returns the `Socket` created by 
+this module.
 
 ### `createServer(addr: string, callback?: () => void)`
 
@@ -109,6 +110,5 @@ of `createServer()`.
 
 ## The Data Frame
 
-This module uses [encoded-buffer](https://github.com/Hyurl/encoded-buffer) to 
-encode and decode data into and from buffer, you can check it's GitHub page to
-see what kind of form of the message is transferred.
+For efficiency concerns, this module uses JSON to encode and decode data into 
+and from buffer.

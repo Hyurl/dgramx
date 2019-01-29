@@ -4,10 +4,7 @@ var dgram = require("dgram");
 var url = require("url");
 var net = require("net");
 var extend = require("tslib").__extends;
-var encodedBuffer = require("encoded-buffer");
-var encode = encodedBuffer.encode;
-var decode = encodedBuffer.decode;
-
+var bsp = require("bsp");
 
 for (var x in dgram) {
     exports[x] = dgram[x];
@@ -22,10 +19,10 @@ var Socket = (function (_super) {
         /** @type {Array<{address: string, port: number}>} */
         _this.receivers = [];
         _this.defaultPeer = null;
+        _this.remains = [];
 
         _this.on("message", function (msg, rinfo) {
-            var data = decode(msg);
-            if (data) {
+            for (let data of bsp.receive(msg, _this.remains)) {
                 data.push(rinfo);
                 _super.prototype.emit.apply(this, data);
             }
@@ -47,7 +44,7 @@ var Socket = (function (_super) {
         }
 
         if (this.receivers.length || this.defaultPeer) {
-            var data = encode(event, msg),
+            var data = bsp.send(event, msg),
                 receivers = this.receivers.length
                     ? this.receivers
                     : [this.defaultPeer];
@@ -56,7 +53,7 @@ var Socket = (function (_super) {
                 var address = receivers[i].address,
                     port = receivers[i].port;
 
-                this.send(data, 0, data.length, port, address, cb);
+                this.send(data, 0, data.byteLength, port, address, cb);
             }
 
             this.receivers = [];
